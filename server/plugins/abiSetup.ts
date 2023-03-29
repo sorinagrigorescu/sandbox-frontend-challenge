@@ -1,12 +1,15 @@
-/* Download ABI on server startup */
-import Web3 from 'web3';
-import { AbiItem } from 'web3-utils'
+import Web3 from "web3";
+import { AbiItem } from "web3-utils";
+import { TEtherscanResponse } from "../utils/types";
 
 export default defineNitroPlugin(async (nitroApp) => {
-  const runtimeConfig = useRuntimeConfig();
-  const web3 = new Web3('ws://localhost:8546');
+  /* Download ABI on server startup */
+  if (Contract.getInstance().getContract()) return;
 
-  const data = await $fetch("/api", {
+  const runtimeConfig = useRuntimeConfig();
+  const web3 = new Web3(runtimeConfig.ethProvider);
+
+  const data: TEtherscanResponse = await $fetch("/api", {
     method: "get",
     baseURL: "https://api.etherscan.io",
     params: {
@@ -19,12 +22,12 @@ export default defineNitroPlugin(async (nitroApp) => {
   let abi: AbiItem | null;
   try {
     abi = JSON.parse(data.result) as AbiItem;
-    if (!abi)
-      throw Error;
   } catch (e) {
-    console.log("ABI Setup Plugin: Error in retrieving or processing the ABI.\nEtherscan API response: ", data.message);
+    console.error(ERROR_MESSAGE_SERVER_ABI, data.message);
     return;
   }
 
-  let contract = new web3.eth.Contract(abi, runtimeConfig.public.contractAddress);
+  Contract.getInstance().setContract(
+    new web3.eth.Contract(abi, runtimeConfig.public.contractAddress)
+  );
 });

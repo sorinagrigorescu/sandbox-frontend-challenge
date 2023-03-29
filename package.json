@@ -9,7 +9,8 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "nuxt": "^3.3.2"
+    "nuxt": "^3.3.2",
+    "typescript": "^5.0.2"
   },
   "dependencies": {
     "eslint": "^8.36.0",

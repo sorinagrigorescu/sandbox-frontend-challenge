@@ -1,6 +1,7 @@
 import { Contract as Web3Contract } from "web3-eth-contract";
 import { ErrorMessages } from "~~/utils/constants";
 
+/* Get doggie based on id and doggie smart contract */
 export const getDoggie = async (id: number, contract: Web3Contract) => {
   try {
     const doggieURI = contract.methods.tokenURI(id).call();

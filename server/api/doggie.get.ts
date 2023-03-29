@@ -1,5 +1,6 @@
 import { ServerErrorMessages } from "../utils/constants";
 
+/* returns random doggie */
 export default defineEventHandler(async () => {
   const contract = Contract.getInstance().getContract();
 

@@ -1,3 +1,4 @@
+/* returns doggie based on id */
 export default defineEventHandler(async (event) => {
   if (!event.context.params?.id || isNaN(Number(event.context.params.id)))
     throw createError({

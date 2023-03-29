@@ -32,6 +32,7 @@ const getRandomDoggie = async () => {
 
 <template>
   <div>
+    <!-- Start of search form -->
     <h1>The doggies explorer</h1>
 
     <form @submit.prevent="searchTokenId">
@@ -40,7 +41,9 @@ const getRandomDoggie = async () => {
       <button type="submit">Search</button>
     </form>
     <button @click="getRandomDoggie">I'm feeling lucky</button>
+    <!-- End of search form -->
 
+    <!-- Start of doggie section -->
     <div v-if="loading">loading</div>
 
     <div v-else-if="error">
@@ -60,6 +63,7 @@ const getRandomDoggie = async () => {
       <img :src="doggie.image_url" :alt="doggie.name" />
       <p>{{ doggie.attributes }}</p>
     </div>
+    <!-- End of doggie section-->
   </div>
 </template>
 

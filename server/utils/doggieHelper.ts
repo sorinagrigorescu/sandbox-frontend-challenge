@@ -1,4 +1,5 @@
 import { Contract as Web3Contract } from "web3-eth-contract";
+import { ErrorMessages } from "~~/utils/constants";
 
 export const getDoggie = async (id: number, contract: Web3Contract) => {
   try {
@@ -13,7 +14,10 @@ export const getDoggie = async (id: number, contract: Web3Contract) => {
     if (err.message.includes("nonexistent token"))
       throw createError({
         statusCode: 404,
-        statusMessage: ERROR_MESSAGE_TOKEN_NOT_FOUND,
+        message: ErrorMessages.TOKEN_NOT_FOUND,
+        data: {
+          tokenId: id,
+        },
       });
 
     /* generic server error */
@@ -21,7 +25,7 @@ export const getDoggie = async (id: number, contract: Web3Contract) => {
 
     throw createError({
       statusCode: 500,
-      statusMessage: ERROR_MESSAGE_DEFAULT,
+      message: ErrorMessages.DEFAULT,
     });
   }
 };

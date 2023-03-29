@@ -1,12 +1,14 @@
+import { ServerErrorMessages } from "../utils/constants";
+
 export default defineEventHandler(async () => {
   const contract = Contract.getInstance().getContract();
 
   if (!contract) {
-    console.error(ERROR_MESSAGE_SERVER_NO_CONTRACT);
+    console.error(ServerErrorMessages.NO_CONTRACT);
 
     throw createError({
       statusCode: 500,
-      statusMessage: ERROR_MESSAGE_DEFAULT,
+      message: ErrorMessages.DEFAULT,
     });
   }
 
@@ -23,7 +25,7 @@ export default defineEventHandler(async () => {
 
     throw createError({
       statusCode: 500,
-      statusMessage: ERROR_MESSAGE_DEFAULT,
+      message: ErrorMessages.DEFAULT,
     });
   }
 });

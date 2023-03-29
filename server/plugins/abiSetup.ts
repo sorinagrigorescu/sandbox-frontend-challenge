@@ -23,11 +23,11 @@ export default defineNitroPlugin(async (nitroApp) => {
   try {
     abi = JSON.parse(data.result) as AbiItem;
   } catch (e) {
-    console.error(ERROR_MESSAGE_SERVER_ABI, data.message);
+    console.error(ServerErrorMessages.ABI, data.message);
     return;
   }
 
   Contract.getInstance().setContract(
-    new web3.eth.Contract(abi, runtimeConfig.public.contractAddress)
+    new web3.eth.Contract(abi, runtimeConfig.public.contractAddress),
   );
 });

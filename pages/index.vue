@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { FetchError } from "ofetch";
+import { TGetDoggyResponse } from "~/utils/types";
 
 const tokenId = ref("");
 
-let doggy: Ref<Object | null> = ref(null);
+let doggy: Ref<Pick<TGetDoggyResponse, string> | null> = ref(null);
 let loading: Ref<boolean> = ref(false);
 let error: Ref<FetchError | null> = ref(null);
 
@@ -12,7 +13,9 @@ const searchTokenId = async () => {
 
   loading.value = true;
 
-  const { data, error: err } = await useFetch(`/api/doggy/${tokenId.value}/`);
+  const { data, error: err } = await useFetch<TGetDoggyResponse>(
+    `/api/doggy/${tokenId.value}/`,
+  );
   doggy.value = data.value;
   error.value = err.value;
 
@@ -22,7 +25,7 @@ const searchTokenId = async () => {
 const getRandomDoggie = async () => {
   loading.value = true;
 
-  const { data, error: err } = await useFetch("/api/doggy/");
+  const { data, error: err } = await useFetch<TGetDoggyResponse>("/api/doggy/");
   doggy.value = data.value;
   error.value = err.value;
 
@@ -60,7 +63,7 @@ const getRandomDoggie = async () => {
       <h3>{{ doggy.owner }}</h3>
 
       <div>{{ doggy.description }}</div>
-      <img :src="doggy.image_url" :alt="doggy.name" />
+      <img :src="doggy.imageUrl as string" :alt="doggy.name as string" />
       <p>{{ doggy.attributes }}</p>
     </div>
     <!-- End of doggy section-->

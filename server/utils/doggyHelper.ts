@@ -1,15 +1,22 @@
 import { Contract as Web3Contract } from "web3-eth-contract";
-import { ErrorMessages } from "~~/utils/constants";
+import { ErrorMessages } from "~/utils/constants";
+import { TGetDoggyResponse } from "~/utils/types";
+import humps from "humps";
 
 /* Get doggy based on id and doggy smart contract */
-export const getDoggie = async (id: number, contract: Web3Contract) => {
+export const getDoggie = async (
+  id: number,
+  contract: Web3Contract,
+): Promise<TGetDoggyResponse> => {
   try {
     const doggyURI = contract.methods.tokenURI(id).call();
     const doggyOwner = contract.methods.ownerOf(id).call();
-    return {
-      ...(await $fetch<Object>(await doggyURI)),
+
+    // @ts-ignore
+    return humps.camelizeKeys({
+      ...(await $fetch<TDoggyURIResponse>(await doggyURI)),
       owner: await doggyOwner,
-    };
+    });
   } catch (err: any) {
     /* no token with the provided id was found */
     if (err.message.includes("nonexistent token"))

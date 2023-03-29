@@ -4,3 +4,11 @@ export type TEtherscanResponse = {
   message: string;
   result: string;
 };
+
+export type TDoggyURIResponse = {
+  name: string;
+  description: string;
+  imageUrl: string;
+  attributes: Object;
+  [x: string | number | symbol]: unknown;
+};

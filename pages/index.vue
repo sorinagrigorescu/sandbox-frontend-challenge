@@ -62,8 +62,9 @@ const getRandomDoggie = async () => {
       <h2>{{ doggy.name }}</h2>
       <h3>{{ doggy.owner }}</h3>
 
-      <div>{{ doggy.description }}</div>
+      <div v-html="$mdRenderer.render(doggy.description as string)" />
       <img :src="doggy.imageUrl as string" :alt="doggy.name as string" />
+
       <p>{{ doggy.attributes }}</p>
     </div>
     <!-- End of doggy section-->

@@ -42,12 +42,21 @@ const getRandomDoggie = async () => {
     <!-- Start of search form -->
     <h1>The doggies explorer</h1>
 
-    <form @submit.prevent="searchTokenId">
-      <label for="tokenId">Token ID</label>
-      <input type="text" id="tokenId" required v-model="tokenId" />
-      <button type="submit">Search</button>
-    </form>
+    <FormKit type="form" @submit="searchTokenId" submit-label="Search">
+      <FormKit
+        type="text"
+        name="tokenId"
+        id="tokenId"
+        label="Token ID"
+        validation="number"
+        v-model="tokenId"
+        :validation-messages="{
+          number: 'This is not a valid token ID',
+        }"
+      />
+    </FormKit>
     <button @click="getRandomDoggie">I'm feelin' lucky</button>
+
     <!-- End of search form -->
 
     <!-- Start of doggy section -->
@@ -86,7 +95,7 @@ const getRandomDoggie = async () => {
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
 img {
   width: 200px;
   height: 200px;
@@ -94,5 +103,17 @@ img {
 
 body {
   font-family: "Montserrat";
+}
+
+/* Override default invalid submit */
+.formkit-form > .formkit-messages {
+  display: none;
+}
+
+/* Remove bullets */
+.formkit-messages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 </style>

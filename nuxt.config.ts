@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/google-fonts"],
+  modules: ["@nuxtjs/google-fonts", "@formkit/nuxt"],
   runtimeConfig: {
     ethProvider: process.env.ETH_PROVIDER,
     public: {

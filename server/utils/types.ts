@@ -1,4 +1,4 @@
-import { Attribute } from "~/utils/types";
+import { Attribute } from "../../utils/types";
 
 /* Etherscan API Response type */
 export type TEtherscanResponse = {

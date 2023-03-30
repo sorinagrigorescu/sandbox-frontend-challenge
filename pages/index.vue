@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FetchError } from "ofetch";
-import { Attribute, TGetDoggyResponse } from "~/utils/types";
+import { Attribute, TGetDoggyResponse } from "../utils/types";
 
 useHead({
   title: "The Doggies",
@@ -90,5 +90,9 @@ const getRandomDoggie = async () => {
 img {
   width: 200px;
   height: 200px;
+}
+
+body {
+  font-family: "Montserrat";
 }
 </style>

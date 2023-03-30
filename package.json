@@ -17,6 +17,7 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "@nuxtjs/google-fonts": "^3.0.0",
     "@types/humps": "^2.0.2",
     "@types/markdown-it": "^12.2.3",
     "eslint": "^8.36.0",

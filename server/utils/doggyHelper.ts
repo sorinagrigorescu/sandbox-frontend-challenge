@@ -1,6 +1,7 @@
 import { Contract as Web3Contract } from "web3-eth-contract";
-import { ErrorMessages } from "~/utils/constants";
-import { TGetDoggyResponse } from "~/utils/types";
+import { ErrorMessages } from "../../utils/constants";
+import { TGetDoggyResponse } from "../../utils/types";
+import { TDoggyURIResponse } from "../utils/types";
 import humps from "humps";
 
 /* Get doggy based on id and doggy smart contract */

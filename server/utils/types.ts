@@ -1,3 +1,5 @@
+import { Attribute } from "~/utils/types";
+
 /* Etherscan API Response type */
 export type TEtherscanResponse = {
   status: string;
@@ -9,6 +11,6 @@ export type TDoggyURIResponse = {
   name: string;
   description: string;
   imageUrl: string;
-  attributes: Object;
+  attributes: Attribute[];
   [x: string | number | symbol]: unknown;
 };

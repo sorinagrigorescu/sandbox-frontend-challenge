@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { FetchError } from "ofetch";
-import { TGetDoggyResponse } from "~/utils/types";
+import { Attribute, TGetDoggyResponse } from "~/utils/types";
+
+useHead({
+  title: "The Doggies",
+});
 
 const tokenId = ref("");
 
@@ -43,29 +47,40 @@ const getRandomDoggie = async () => {
       <input type="text" id="tokenId" required v-model="tokenId" />
       <button type="submit">Search</button>
     </form>
-    <button @click="getRandomDoggie">I'm feeling lucky</button>
+    <button @click="getRandomDoggie">I'm feelin' lucky</button>
     <!-- End of search form -->
 
     <!-- Start of doggy section -->
     <div v-if="loading">loading</div>
 
     <div v-else-if="error">
-      <div v-if="error.data.statusCode == 500">
-        Oops! Something went wrong :(
-      </div>
       <div v-if="error.data.statusCode == 404">
         Token with ID {{ error.data.data.tokenId }} doesn't exist
       </div>
+      <div v-else>Oops! Something went wrong :(</div>
     </div>
 
     <div v-else-if="doggy">
       <h2>{{ doggy.name }}</h2>
-      <h3>{{ doggy.owner }}</h3>
+      <h3>
+        <a :href="'https://etherscan.io/address/' + doggy.owner">{{
+          doggy.owner
+        }}</a>
+      </h3>
 
       <div v-html="$mdRenderer.render(doggy.description as string)" />
       <img :src="doggy.imageUrl as string" :alt="doggy.name as string" />
 
-      <p>{{ doggy.attributes }}</p>
+      <table>
+        <th />
+        <tr
+          v-for="attribute in (doggy.attributes as Attribute[])"
+          :key="attribute.traitType"
+        >
+          <td>{{ attribute.traitType }}</td>
+          <td>{{ attribute.value }}</td>
+        </tr>
+      </table>
     </div>
     <!-- End of doggy section-->
   </div>

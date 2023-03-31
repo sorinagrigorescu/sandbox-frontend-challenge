@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { Attribute, TGetDoggyResponse } from "../utils/types";
 
-const props = defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
-
-// console.log(props.loading);
+defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
 </script>
 
 <template>
@@ -134,6 +132,7 @@ const props = defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
 
   &[loading] {
     height: 800px;
+    box-shadow: none;
     background: linear-gradient(-45deg, #c0c0c0 25%, #ebebeb 35%, #c0c0c0 45%);
     background-size: 400% 400%;
     animation: loading-gradient 4s ease infinite;

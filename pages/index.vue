@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { FetchError } from "ofetch";
-import { Attribute, TGetDoggyResponse } from "../utils/types";
+import { TGetDoggyResponse } from "../utils/types";
 
 useHead({
   title: "The Doggies",
@@ -76,10 +76,7 @@ const getRandomDoggie = async () => {
 
     <!-- Start of doggy section -->
     <div v-if="error">
-      <div v-if="error.data.statusCode == 404">
-        Token with ID {{ error.data.data.tokenId }} doesn't exist
-      </div>
-      <div v-else>Oops! Something went wrong :(</div>
+      <ErrorBox :error="error" />
     </div>
 
     <div v-else-if="doggy || loading" class="pane-container">

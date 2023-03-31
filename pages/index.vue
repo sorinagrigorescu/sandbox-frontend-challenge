@@ -75,17 +75,18 @@ const getRandomDoggie = async () => {
     <!-- End of search form -->
 
     <!-- Start of doggy section -->
-    <div v-if="loading">loading</div>
-
-    <div v-else-if="error">
+    <div v-if="error">
       <div v-if="error.data.statusCode == 404">
         Token with ID {{ error.data.data.tokenId }} doesn't exist
       </div>
       <div v-else>Oops! Something went wrong :(</div>
     </div>
 
-    <div v-else-if="doggy" class="pane-container">
-      <doggy-pane :data="(doggy as TGetDoggyResponse)"></doggy-pane>
+    <div v-else-if="doggy || loading" class="pane-container">
+      <doggy-pane
+        :data="(doggy as TGetDoggyResponse)"
+        :loading="loading"
+      ></doggy-pane>
     </div>
     <!-- End of doggy section-->
   </div>

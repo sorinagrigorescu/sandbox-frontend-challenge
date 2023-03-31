@@ -38,7 +38,7 @@ const getRandomDoggie = async () => {
 </script>
 
 <template>
-  <div>
+  <div class="content-container">
     <!-- Start of search form -->
     <div class="page-header">
       <div class="page-header__title">The Doggies Explorer</div>
@@ -59,7 +59,7 @@ const getRandomDoggie = async () => {
             validation="required|number"
             v-model="tokenId"
             :validation-messages="{
-              required: 'This is not a valid token ID',
+              required: 'Please fill in a token ID',
               number: 'This is not a valid token ID',
             }"
             prefix-icon="search"
@@ -84,27 +84,8 @@ const getRandomDoggie = async () => {
       <div v-else>Oops! Something went wrong :(</div>
     </div>
 
-    <div v-else-if="doggy">
-      <h2>{{ doggy.name }}</h2>
-      <h3>
-        <a :href="'https://etherscan.io/address/' + doggy.owner">{{
-          doggy.owner
-        }}</a>
-      </h3>
-
-      <div v-html="$mdRenderer.render(doggy.description as string)" />
-      <img :src="doggy.imageUrl as string" :alt="doggy.name as string" />
-
-      <table>
-        <th />
-        <tr
-          v-for="attribute in (doggy.attributes as Attribute[])"
-          :key="attribute.traitType"
-        >
-          <td>{{ attribute.traitType }}</td>
-          <td>{{ attribute.value }}</td>
-        </tr>
-      </table>
+    <div v-else-if="doggy" class="pane-container">
+      <doggy-pane :data="(doggy as TGetDoggyResponse)"></doggy-pane>
     </div>
     <!-- End of doggy section-->
   </div>
@@ -114,6 +95,21 @@ const getRandomDoggie = async () => {
 $blue: #0275ff;
 $color-accent-focus: $blue;
 $color-border: #94929c;
+
+.content-container {
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pane-container {
+  width: 100%;
+}
+
+* {
+  font-family: "Montserrat";
+}
 
 .formkit-outer * {
   box-sizing: border-box;
@@ -244,19 +240,21 @@ $button-submit-color-hover: black;
   }
 }
 
+.page-header {
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-bottom: 32px;
+}
+
 .page-header__title {
   font-family: "Montserrat";
   font-size: 36px;
   text-align: center;
   padding-bottom: 8px;
   font-weight: 700;
-}
-
-.page-header {
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .page-header__search-form {
@@ -274,10 +272,5 @@ $button-submit-color-hover: black;
 }
 .formkit-outer {
   width: 100%;
-}
-
-img {
-  width: 200px;
-  height: 200px;
 }
 </style>

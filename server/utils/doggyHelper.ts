@@ -13,8 +13,7 @@ export const getDoggie = async (
     const doggyURI = contract.methods.tokenURI(id).call();
     const doggyOwner = contract.methods.ownerOf(id).call();
 
-    // @ts-ignore
-    return humps.camelizeKeys({
+    return humps.camelizeKeys<TGetDoggyResponse>({
       ...(await $fetch<TDoggyURIResponse>(await doggyURI)),
       owner: await doggyOwner,
     });

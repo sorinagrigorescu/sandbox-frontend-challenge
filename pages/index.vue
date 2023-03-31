@@ -103,7 +103,6 @@ $button-submit-color-background-hover: $color-green-very-dark-muted;
 
 body {
   margin: 0;
-  width: 100%;
   height: 100vh;
 }
 
@@ -111,8 +110,7 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
-  width: 100vw;
-  min-height: 100vh;
+  min-height: 100%;
   background-image: url("../assets/img/cannabis-texture.jpg");
   background-blend-mode: multiply;
   background-size: cover;

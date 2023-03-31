@@ -5,7 +5,21 @@ const props = defineProps<{ error: FetchError }>();
 </script>
 
 <template>
+  <!--Token not found message-->
   <div v-if="props.error.data.statusCode == 404" class="error">
+    <img src="../assets/img/snoop-serious.png" alt="Snoop Dogg with RBF" />
+    <div class="error_text">
+      <div class="error__title">
+        Dayum! We have no such doggy.
+        <nuxt-icon name="noto-crying face" filled></nuxt-icon>
+      </div>
+      <div class="error__description">
+        Try again with an existing token ID. Or maybe you’re feelin’ lucky?
+      </div>
+    </div>
+  </div>
+  <!--Default error message-->
+  <div v-else class="error">
     <img src="../assets/img/snoop-cry.png" alt="Snoop Dogg crying" />
     <div class="error__text">
       <div class="error__title">
@@ -15,18 +29,6 @@ const props = defineProps<{ error: FetchError }>();
       </div>
       <div class="error__description">
         Something went wrong on our side, but we’ll be up later. Fo’ shizzle.
-      </div>
-    </div>
-  </div>
-  <div v-else class="error">
-    <img src="../assets/img/snoop-serious.png" alt="Snoop Dogg with RBF" />
-    <div class="error_text">
-      <div class="error__title">
-        Dayum! We have no such doggy.
-        <nuxt-icon name="noto-crying face" filled></nuxt-icon>
-      </div>
-      <div class="error__description">
-        Try again with an existing token ID. Or maybe you’re feelin’ lucky?
       </div>
     </div>
   </div>

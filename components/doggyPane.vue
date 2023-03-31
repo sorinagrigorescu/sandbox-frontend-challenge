@@ -32,7 +32,7 @@ defineProps<{ data: TGetDoggyResponse }>();
         <caption>
           Traits
         </caption>
-        <th colspan="2">Traits</th>
+        <th />
         <tr
           v-for="attribute in (data.attributes as Attribute[])"
           :key="attribute.traitType"
@@ -100,9 +100,11 @@ table {
   background: transparent;
   border-collapse: collapse;
 
-  th {
+  caption {
     font-size: 20px;
     line-height: 32px;
+    font-weight: 700;
+    margin-bottom: 12px;
   }
 
   tr {
@@ -112,10 +114,6 @@ table {
   td {
     padding: 6px 12px;
     height: 28px;
-  }
-
-  caption {
-    display: none;
   }
 
   .table__type {

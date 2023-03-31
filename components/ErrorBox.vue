@@ -9,7 +9,8 @@ const props = defineProps<{ error: FetchError }>();
     <img src="~/assets/img/snoop-cry.png" alt="Snoop Dogg crying" />
     <div class="error__text">
       <div class="error__title">
-        It’s not you,<br/> it’s me.
+        It’s not you,<br />
+        it’s me.
         <nuxt-icon name="noto-broken-heart" filled></nuxt-icon>
       </div>
       <div class="error__description">
@@ -31,7 +32,7 @@ const props = defineProps<{ error: FetchError }>();
   </div>
 </template>
 
-<style>
+<style scoped>
 .error {
   display: flex;
   max-width: 530px;
@@ -43,8 +44,11 @@ const props = defineProps<{ error: FetchError }>();
 }
 
 .error__text {
-  padding-top: 32px;
-  padding-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 img {
@@ -57,5 +61,23 @@ img {
   line-height: 130%;
   font-weight: 700;
   padding-bottom: 32px;
+}
+
+/* quick fix for small screens */
+@media (max-width: 600px) {
+  .error {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .error__title {
+    padding-bottom: 8px;
+  }
+
+  .error__text {
+    padding: 8px;
+  }
 }
 </style>

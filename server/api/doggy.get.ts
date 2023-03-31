@@ -1,4 +1,5 @@
 import { ServerErrorMessages } from "../utils/constants";
+import { ErrorMessages } from "../../utils/constants";
 
 /* returns random doggy */
 export default defineEventHandler(async () => {

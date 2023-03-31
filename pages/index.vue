@@ -41,6 +41,10 @@ const getRandomDoggie = async () => {
   <div class="content-container">
     <!-- Start of search form -->
     <div class="page-header">
+      <div class="page-header__logo">
+        <img src="~/assets/img/snoop-logo.png" />
+      </div>
+
       <div class="page-header__title">The Doggies Explorer</div>
 
       <div class="page-header__search-form">
@@ -90,15 +94,63 @@ const getRandomDoggie = async () => {
 </template>
 
 <style lang="scss">
-$blue: #0275ff;
-$color-accent-focus: $blue;
+$color-accent-focus: $color-green-light-muted;
 $color-border: #94929c;
 
+$button-submit-color-background: $color-green-dark-muted;
+$button-submit-color: white;
+$button-submit-color-background-hover: $color-green-very-dark-muted;
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+#__nuxt {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("~/assets/img/cannabis-texture.jpg");
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.page-header__logo {
+  max-width: 100%;
+  max-height: 100%;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
 .content-container {
-  max-width: 1100px;
+  max-width: calc(90% - 2 * $content-container-padding-x);
+  width: calc(920px - 2 * $content-container-padding-x);
+  min-height: calc(
+    100vh - 2 * $content-container-padding-y - 2 * $content-container-margin-y
+  );
+  height: auto;
+
+  margin: $content-container-margin-y 0;
+  padding: $content-container-padding-y $content-container-padding-x 48px
+    $content-container-padding-x;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 24px;
+
+  background: white;
+
+  border-radius: 24px;
+  box-shadow: 0px 4px 16px 4px rgba(0, 0, 0, 0.65);
 }
 
 .pane-container {
@@ -192,12 +244,6 @@ $color-border: #94929c;
 }
 
 /* buttons */
-$button-submit-color-background: red;
-$button-submit-color: white;
-
-$button-submit-color-background-hover: blue;
-$button-submit-color-hover: black;
-
 [data-type="submit"] .formkit-input {
   @include button;
 
@@ -227,6 +273,7 @@ $button-submit-color-hover: black;
 
 .button_text {
   @include button;
+  margin-top: 4px;
 
   &,
   &:focus {
@@ -240,6 +287,7 @@ $button-submit-color-hover: black;
 
 .page-header {
   max-width: 450px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

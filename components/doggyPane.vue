@@ -7,7 +7,7 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
 <template>
   <div class="container">
     <!-- skeleton placeholder for loading -->
-    <div v-if="loading" class="pane-container">
+    <div v-if="loading" class="pane-container" loading>
       <div class="pane-overview" loading>
         <div class="pane-overview__text" loading />
         <div class="pane-overview__thumbnail" loading />
@@ -21,6 +21,7 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
         <div class="pane-overview__text">
           <h2 class="pane-overview__name">{{ data.name }}</h2>
           <h3 class="pane-overview__owner">
+            <strong>Owner: </strong>
             <a :href="'https://etherscan.io/address/' + data.owner">{{
               data.owner
             }}</a>
@@ -57,7 +58,9 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+$max-img-width: 300px;
+
 .container {
   width: 100%;
 }
@@ -82,7 +85,7 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
   [loading] & {
     width: 100%;
     max-width: 80%;
-    height: 200px;
+    height: $max-img-width;
   }
 }
 
@@ -98,8 +101,8 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
 }
 
 .pane-overview__thumbnail {
-  max-width: 200px;
-  max-height: 200px;
+  max-width: $max-img-width;
+  max-height: $max-img-width;
 
   img {
     width: 100%;
@@ -108,9 +111,9 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
   }
 
   &[loading] {
-    min-width: 20%;
-    width: 200px;
-    height: 200px;
+    min-width: 30%;
+    width: $max-img-width;
+    height: $max-img-width;
   }
 }
 
@@ -123,10 +126,12 @@ defineProps<{ data: TGetDoggyResponse; loading: boolean }>();
 }
 
 .table-container {
-  width: 100%;
+  $padding-horizontal: 16px;
+
+  width: calc(100% - 2 * $padding-horizontal);
   max-width: 600px;
 
-  padding: 20px 16px 16px 16px;
+  padding: 20px $padding-horizontal 16px $padding-horizontal;
   border-radius: 24px;
   box-shadow: 0px 4px 16px 4px rgba(0, 0, 0, 0.05);
 
@@ -176,6 +181,45 @@ table {
   animation: loading-gradient 2s ease-in-out infinite;
 
   border-radius: 12px;
+}
+
+/*
+  quick fix to ensure some kind of responsiveness
+  the placeholder looks especially bad :P
+ */
+@media (max-width: 600px) {
+  .pane-overview {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .pane-overview__text {
+    [loading] & {
+      width: 100%;
+      height: $max-img-width;
+    }
+  }
+
+  .pane-overview__thumbnail {
+    width: 100%;
+    height: 300px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+    }
+
+    &[loading] {
+      width: 100%;
+      height: 300px;
+    }
+  }
+}
+
+a {
+  color: rgb(0, 122, 0);
 }
 
 @keyframes loading-gradient {

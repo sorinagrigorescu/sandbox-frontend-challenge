@@ -40,22 +40,37 @@ const getRandomDoggie = async () => {
 <template>
   <div>
     <!-- Start of search form -->
-    <h1>The doggies explorer</h1>
+    <div class="page-header">
+      <div class="page-header__title">The Doggies Explorer</div>
 
-    <FormKit type="form" @submit="searchTokenId" submit-label="Search">
-      <FormKit
-        type="text"
-        name="tokenId"
-        id="tokenId"
-        label="Token ID"
-        validation="number"
-        v-model="tokenId"
-        :validation-messages="{
-          number: 'This is not a valid token ID',
-        }"
-      />
-    </FormKit>
-    <button @click="getRandomDoggie">I'm feelin' lucky</button>
+      <div class="page-header__search-form">
+        <FormKit
+          type="form"
+          @submit="searchTokenId"
+          :incomplete-message="false"
+          submit-label="Search"
+          class=""
+        >
+          <FormKit
+            type="text"
+            name="tokenId"
+            id="token-id"
+            label="Token ID"
+            validation="required|number"
+            v-model="tokenId"
+            :validation-messages="{
+              required: 'This is not a valid token ID',
+              number: 'This is not a valid token ID',
+            }"
+            prefix-icon="search"
+          />
+        </FormKit>
+        <button @click="getRandomDoggie" class="button_text">
+          I'm feelin' lucky
+          <nuxt-icon name="noto-four-leaf-clover" filled></nuxt-icon>
+        </button>
+      </div>
+    </div>
 
     <!-- End of search form -->
 
@@ -95,25 +110,174 @@ const getRandomDoggie = async () => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+$blue: #0275ff;
+$color-accent-focus: $blue;
+$color-border: #94929c;
+
+.formkit-outer * {
+  box-sizing: border-box;
+}
+
+/* this removes default html input appearance */
+[type="text"].formkit-input {
+  appearance: none;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/* fixed position of button, regardless if error message is displayed or not */
+[data-family="text"].formkit-outer {
+  height: 80px;
+}
+
+/* text input */
+[type="text"].formkit-input {
+  font-family: "Montserrat";
+  font-size: 16px;
+
+  background-color: transparent;
+
+  width: 100%;
+}
+
+.formkit-inner {
+  position: relative;
+  box-shadow: 0 0 0 1px $color-border;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+.formkit-inner:focus-within {
+  box-shadow: 0 0 0 2px $color-accent-focus;
+  border: $color-accent-focus;
+}
+
+.formkit-label {
+  font-family: "Montserrat";
+  font-size: 14px;
+}
+
+/* text input search icon */
+.formkit-outer .formkit-icon {
+  width: 2.5em;
+  display: flex;
+  align-self: stretch;
+  user-select: none;
+  padding: 8px;
+}
+
+/* error message */
+.formkit-messages {
+  padding: 0;
+  margin: 4px;
+}
+
+.formkit-message {
+  font-family: "Montserrat";
+  font-size: 12px;
+  list-style-type: none;
+  color: red;
+}
+
+@mixin button {
+  border-radius: 24px;
+  font-family: "Montserrat";
+  font-weight: 700;
+  font-size: 14px;
+
+  border: 0;
+  padding: 8px 16px;
+
+  transition: all 0.25s;
+
+  margin-bottom: 4px;
+}
+
+/* buttons */
+$button-submit-color-background: red;
+$button-submit-color: white;
+
+$button-submit-color-background-hover: blue;
+$button-submit-color-hover: black;
+
+[data-type="submit"] .formkit-input {
+  @include button;
+
+  width: 140px;
+  height: 42px;
+  font-weight: 400;
+  text-transform: uppercase;
+  background: $button-submit-color-background;
+  color: $button-submit-color;
+}
+
+[data-type="submit"] .formkit-input:focus {
+  background: $button-submit-color-background;
+}
+
+[data-type="submit"] .formkit-input:focus-visible {
+  background: $button-submit-color-background;
+}
+
+[data-loading] [data-type="submit"] .formkit-input {
+  background: $button-submit-color-background;
+}
+
+[data-type="submit"] .formkit-input:hover {
+  background: $button-submit-color-background-hover;
+}
+
+.button_text {
+  @include button;
+
+  &,
+  &:focus {
+    background: transparent;
+  }
+
+  &:hover {
+    background: #eee;
+  }
+}
+
+.page-header__title {
+  font-family: "Montserrat";
+  font-size: 36px;
+  text-align: center;
+  padding-bottom: 8px;
+  font-weight: 700;
+}
+
+.page-header {
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header__search-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formkit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.formkit-outer {
+  width: 100%;
+}
+
 img {
   width: 200px;
   height: 200px;
-}
-
-body {
-  font-family: "Montserrat";
-}
-
-/* Override default invalid submit */
-.formkit-form > .formkit-messages {
-  display: none;
-}
-
-/* Remove bullets */
-.formkit-messages {
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
 </style>

@@ -42,7 +42,7 @@ const getRandomDoggie = async () => {
     <!-- Start of search form -->
     <div class="page-header">
       <div class="page-header__logo">
-        <img src="~/assets/img/snoop-logo.png" />
+        <img src="../assets/img/snoop-logo.png" />
       </div>
 
       <div class="page-header__title">The Doggies Explorer</div>
@@ -113,7 +113,7 @@ body {
   justify-content: center;
   width: 100vw;
   min-height: 100vh;
-  background-image: url("~/assets/img/cannabis-texture.jpg");
+  background-image: url("../assets/img/cannabis-texture.jpg");
   background-blend-mode: multiply;
   background-size: cover;
   background-repeat: no-repeat;

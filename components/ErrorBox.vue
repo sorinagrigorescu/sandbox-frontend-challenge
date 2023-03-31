@@ -6,7 +6,7 @@ const props = defineProps<{ error: FetchError }>();
 
 <template>
   <div v-if="props.error.data.statusCode == 404" class="error">
-    <img src="~/assets/img/snoop-cry.png" alt="Snoop Dogg crying" />
+    <img src="../assets/img/snoop-cry.png" alt="Snoop Dogg crying" />
     <div class="error__text">
       <div class="error__title">
         It’s not you,<br />
@@ -19,7 +19,7 @@ const props = defineProps<{ error: FetchError }>();
     </div>
   </div>
   <div v-else class="error">
-    <img src="~/assets/img/snoop-serious.png" alt="Snoop Dogg with RBF" />
+    <img src="../assets/img/snoop-serious.png" alt="Snoop Dogg with RBF" />
     <div class="error_text">
       <div class="error__title">
         Dayum! We have no such doggy.
